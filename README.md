@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Zephyr](https://img.shields.io/badge/Zephyr-4.2+-blue.svg)](https://www.zephyrproject.org/)
-[![Platform](https://img.shields.io/badge/Platform-STM32F103C8T6-green.svg)]()
+[![Platform](https://img.shields.io/badge/Platform-STM32F103C8T6-green.svg)](https://docs.zephyrproject.org/latest/boards/others/stm32_min_dev/doc/index.html)
 
 A minimal, production-ready template for Zephyr RTOS on the STM32F103C8T6 "Blue Pill" board. Features one-click building and flashing from VS Code, automatic reset handling, and proper hardware configuration.
 
@@ -23,11 +23,12 @@ Before using this template, make sure you have:
 
 ## Quick Start
 
+**Activate the virtual environment for `west`**. Instructions on how to create it are described in the Manual Zephyr RTOS Installation on Windows guide.
+
 1. **Clone or download this template**
 ```bash
    git clone https://github.com/gkiryaziev/Zephyr_STM32F103C8T6.git
    cd Zephyr_STM32F103C8T6
-   Activate the virtual environment for west. Instructions on how to create it are described in the Manual Zephyr RTOS Installation on Windows guide.
 ```
 
 2. **Connect your Blue Pill board**
@@ -36,13 +37,21 @@ Before using this template, make sure you have:
 
 3. **Build the project**
    - In VS Code: `Terminal → Run Task → Build`
-   - Or from command line: `west build -b stm32_min_dev@blue/stm32f103xb`
+   - Or from command line: `west build -b stm32_min_dev@blue/stm32f103xb -- -DOVERLAY_CONFIG=prj.conf -DDTC_OVERLAY_FILE=bluepill_f103c8.overlay`
 
 4. **Flash the board**
    - In VS Code: `Terminal → Run Task → Flash (64k)`
    - Or from command line: `west flash`
 
 5. **Success!** The LED on PC13 should blink every second.
+
+If trouble occurs, see the **Troubleshooting** section.
+
+As a result, you should get something like this.
+
+![west build](build.png "west build")
+![west flash 64k](flash_64k.png "west flash 64k")
+![west flash 128k](flash_128k.png "west flash 128k")
 
 ---
 
@@ -181,9 +190,18 @@ It works by pointing the C/C++ extension to the `compile_commands.json` file. Th
 
 ## Troubleshooting
 
-### Problem: "Unable to reset target"
+### Problem: "AP write error, reset will not halt"
 
 **Cause:** Microcontroller is running and OpenOCD can't halt it.
+
+This error may appear during the `first` firmware update or after completely deleting the `build` folder.
+
+```
+Error: Failed to read memory at 0xe000ed04
+Info : [stm32f1x.cpu] AP write error, reset will not halt
+
+FATAL ERROR: command exited with status 1: D:/Zephyr/tools/openocd/bin/openocd.exe -s 'D:/Zephyr/zephyrproject/zephyr/boards/others/stm32_min_dev\support' -s 'C:\Program Files/OpenOCD/share/openocd/scripts' -f 'D:/Zephyr/zephyrproject/zephyr/boards/others/stm32_min_dev\support\openocd.cfg' '-c init' '-c targets' -c 'reset init' -c 'flash write_image erase C:/Users/Admin/Desktop/Project/Zephyr_STM32F103C8T6/build/zephyr/zephyr.hex' -c 'reset run' -c shutdown
+```
 
 **Solution:**
 1. Press and hold the RESET button on the board
