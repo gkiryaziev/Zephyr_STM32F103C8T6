@@ -1,0 +1,17 @@
+
+/ {
+    aliases {
+        my-led = &pc_13; // NOTE: In "my-led", the name separator is "-", but "_" in the C file.
+    };
+
+    leds {
+        compatible = "gpio-leds";
+        pc_13: pc-13 {
+            gpios = <&gpioc 13 GPIO_ACTIVE_LOW>;
+        };
+    };
+};
+
+&pinctrl {
+    swj-cfg = "jtag-disable"; // JTAG-DP Disabled and SW-DP Enabled. Releases: PA15 PB3 PB4.
+};

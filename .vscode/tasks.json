@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "west",
+            "args": [
+                "build",
+				// "-p","always",
+                "-b", "stm32_min_dev@blue/stm32f103xb",
+                "--",
+                "-DOVERLAY_CONFIG=prj.conf",
+                "-DDTC_OVERLAY_FILE=bluepill_f103c8.overlay"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash (64k)",
+            "type": "shell",
+            "command": "west flash",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Flash (128k)",
+            "type": "shell",
+            "command": "west flash --config ./stm32f1x_128k.cfg",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "rm -rf build",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
