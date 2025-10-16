@@ -45,7 +45,7 @@ Before using this template, make sure you have:
 
 5. **Success!** The LED on PC13 should blink every second.
 
-If trouble occurs, see the **Troubleshooting** section.
+If trouble occurs, see the **[Troubleshooting](#troubleshooting)** section.
 
 As a result, you should get something like this.
 
@@ -188,7 +188,7 @@ It works by pointing the C/C++ extension to the `compile_commands.json` file. Th
 
 **Important:** For the code autocompletion to work correctly, you must run the **`Build`** task at least once after cloning the project or after a `Clean` task.
 
-## Troubleshooting
+## Troubleshooting<a id='troubleshooting'></a>
 
 ### Problem: "AP write error, reset will not halt"
 
