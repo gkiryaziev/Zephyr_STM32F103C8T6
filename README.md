@@ -234,4 +234,4 @@ Ensure that `CONFIG_DEBUG=y` is set in `prj.conf` (already included in this temp
 
 **Cause:** Zephyr environment not activated.
 
-**Solution:** Run your `zephyr-env.cmd` script first (Windows) or source the Zephyr environment (Linux/Mac).
+**Solution:** Run your `zephyr-env.cmd` script first (Windows) or source the Zephyr environment file (Linux/Mac). Your terminal prompt should show `(.venv)`.
