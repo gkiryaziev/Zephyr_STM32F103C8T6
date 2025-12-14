@@ -145,7 +145,7 @@ The `.vscode/tasks.json` file contains pre-configured tasks for building, flashi
         {
             "label": "Flash (64k)",
             "type": "shell",
-            "command": "west flash",
+            "command": "west flash --config ./stm32f1x_64k.cfg",
             "group": "build",
             "problemMatcher": []
         },
